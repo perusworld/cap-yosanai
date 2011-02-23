@@ -1,0 +1,29 @@
+Yosanai - Capistrano Plugins
+
+A set of capistrano plugins/tasks 
+
+1.System
+  ~~~~~~
+  This plugin has a bunch of utility functions such as setup users, directories etc 
+
+2.Hadoop
+  ~~~~~~
+  You can setup hadoop nodes using this plugin. This will setup the following (you can invoke all of the mentioned tasks using one task hadoop:setup)
+  2.1 Users (hadoop:setup_user)
+      Will create a user hadoop and group by the same name
+  2.2 SSH Keys (hadoop:setup_ssh_keys)
+      Will create a ssh key pair on the name node and copy the public key to the other node machines
+  2.3 Directories (hadoop:setup_dirs)
+      Will create directories required for hadoop to run including name, data and mapred
+  2.4 Hadoop Binaries (hadoop:setup_binaries)
+      Will download the setup the hadoop binaries
+  2.5 Config Files (hadoop:setup_config)
+      Will copy the neccessary config files needed by hadoop nodes
+  2.6 Hosts file (hadoop:setup_hosts)
+      Will update the hosts file with the ip address and dns mappings of all the nodes, this can be omitted if your servers get their host names from dns
+  2.7 HDFS Directory (hadoop:setup_hdfs)
+      Will setup hdfs directory (hdfs format), should be invoked once
+  2.8 Start (hadoop:start)
+      Will start the name/secondary/task/job/data nodes in the required order
+  2.9 Stop (hadoop:stop)
+      Will stop the name/secondary/task/job/data nodes in the required order

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+  <property>
+    <name>mapred.job.tracker</name>
+    <value><%= find_servers(:roles => :hadoop, :only => { :maprednode => true }).first.host %>:8021</value>
+    <final>true</final>
+  </property>
+
+  <property>
+    <name>mapred.local.dir</name>
+    <value>/mnt/mapred/mirror1/local</value>
+    <final>true</final>
+  </property>
+
+  <property>
+    <name>mapred.system.dir</name>
+    <value>/mapred/system</value>
+    <final>true</final>
+  </property>
+
+  <property>
+    <name>mapred.tasktracker.map.tasks.maximum</name>
+    <value>7</value>
+    <final>true</final>
+  </property>
+
+  <property>
+    <name>mapred.tasktracker.reduce.tasks.maximum</name>
+    <value>7</value>
+    <final>true</final>
+  </property>
+  
+  <property>
+    <name>mapred.map.child.java.opts</name>
+    <value>-Xmx400m -agentlib:jdwp=transport=dt_socket,address=0.0.0.0,server=y,suspend=n</value>
+  </property>
+  
+  <property>
+    <name>mapred.reduce.child.java.opts</name>
+    <value>-Xmx400m -agentlib:jdwp=transport=dt_socket,address=0.0.0.0,server=y,suspend=n</value>
+  </property>
+  
+</configuration>
