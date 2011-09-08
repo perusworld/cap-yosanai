@@ -1,1 +1,2 @@
-<% servers = find_servers(:roles => :hadoop, :only => { :datanode => true }) %><% servers.each do |server| %><%= server.host %><% end %>
+<% servers = find_servers(:roles => :hadoop, :only => { :datanode => true }) %><% servers.each do |server| %><%= server.host %>
+<% end %>
