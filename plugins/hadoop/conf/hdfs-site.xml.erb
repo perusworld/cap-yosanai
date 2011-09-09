@@ -11,4 +11,14 @@
     <value>/mnt/hdfs/mirror1/data</value>
     <final>true</final>
   </property>
+  <property>
+    <name>dfs.permissions</name>
+    <value><%= dfs_permissions_enabled %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>dfs.permissions.supergroup</name>
+    <value><%= dfs_permissions_supergroup %></value>
+    <final>true</final>
+  </property>
 </configuration>
