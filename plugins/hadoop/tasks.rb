@@ -42,6 +42,11 @@ namespace :hadoop do
 		ysystem.setup_dirs "#{hadoop_user}","#{hadoop_group}",["#{hadoop_basedir}"]|hdfs_dirs|mapred_dirs
 	end
 
+	desc "Cleanup hadoop related directories"
+	task :cleanup_dirs, :roles => :hadoop do
+		ysystem.clean_dirs hdfs_dirs|mapred_dirs
+	end
+
 	desc "Setup hadoop binaries"
 	task :setup_binaries, :roles => :hadoop do
 	    command =<<-CMD
@@ -65,8 +70,10 @@ namespace :hadoop do
 	desc "Setup hosts"
 	task :setup_hosts, :roles => :hadoop do
 		find_servers(:roles => :hadoop).each do |server|
-			ysystem.setup_etc_hosts "#{server.options[:name]}","#{server.host}"
+			ysystem.setup_etc_hosts "#{server.host}","#{server.options[:ip]}"
 		end
+		ysystem.setup_etc_localhost if fetch(:update_etc_localhost)
+		
 	end
 
 	desc "Setup hdfs"

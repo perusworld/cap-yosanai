@@ -40,6 +40,12 @@ module YSystem
 		end
 	end
 
+	def clean_dirs(dirs = {})
+		dirs.each do |dir|
+			invoke_command "/bin/rm -rf #{dir}", {:via => :sudo}
+		end
+	end
+
 	def setup_config(conf_files = {},src_dir=nil,target_folder=nil)
 		conf_files.each do |conf_file|
 			data = ERB.new(File.read("#{src_dir}/#{conf_file}.erb")).result(binding)
@@ -52,6 +58,16 @@ module YSystem
 	    command =<<-CMD
 	   	  grep -v #{host} /etc/hosts > /etc/hosts_cp &&
 	   	  echo "#{ipaddress}\t#{host}" >> /etc/hosts_cp &&
+	   	  cp -f /etc/hosts_cp /etc/hosts
+	    CMD
+	    invoke_command command, options
+	end
+
+	def setup_etc_localhost(options = {})
+		options.merge({:via => :sudo})
+	    command =<<-CMD
+	   	  grep -v 127.0.0.1 /etc/hosts > /etc/hosts_cp &&
+	   	  echo "127.0.0.1\t$CAPISTRANO:HOST$\tlocalhost" >> /etc/hosts_cp &&
 	   	  cp -f /etc/hosts_cp /etc/hosts
 	    CMD
 	    invoke_command command, options

@@ -3,7 +3,7 @@
 <configuration>
   <property>
     <name>fs.default.name</name>
-    <value>hdfs://<%= find_servers(:roles => :hadoop, :only => { :namenode => true }).first.host %>:18020/</value>
+    <value>hdfs://<%= find_servers(:roles => :hadoop, :only => { :namenode => true }).first.options[:ip] %>:18020/</value>
     <final>true</final>
   </property>
 </configuration>

@@ -3,6 +3,3 @@ set :default_stage, "staging"
 require 'capistrano/ext/multistage'
 set :application, "cap-yosanai"
 
-
-
-

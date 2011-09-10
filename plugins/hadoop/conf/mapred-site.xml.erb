@@ -3,7 +3,7 @@
 <configuration>
   <property>
     <name>mapred.job.tracker</name>
-    <value><%= find_servers(:roles => :hadoop, :only => { :maprednode => true }).first.host %>:8021</value>
+    <value><%= find_servers(:roles => :hadoop, :only => { :maprednode => true }).first.options[:ip] %>:8021</value>
     <final>true</final>
   </property>
 
